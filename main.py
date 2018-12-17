@@ -19,7 +19,3 @@ if __name__ == '__main__':
 
     except KeyboardInterrupt:
         print('pass in arguments as: <ip> <start_port> <end_port> <threads>')
-
-    except Exception as e:
-        print(len(argv))
-        print(e)

