@@ -37,8 +37,8 @@ def make_targets(sorted_traffic, ip_list):
 
     return targets
 
-def bro_dos():
-    conns = find_traffic(SSL_LOG,FLAGS)
+def bro_dos(log, flags):
+    conns = find_traffic(log,flags)
     ips = sort_ips(conns)
     targets = make_targets(conns, ips)
 
@@ -47,7 +47,9 @@ def bro_dos():
         Parallel(n_jobs = 2, prefer = 'threads')(delayed(func))#for i in range(THREADS))
 
 if __name__ == '__main__':
-    conns = find_traffic(SSL_LOG,FLAGS)
+    log = argv[1]
+    flags = argv[2].split[',']
+    conns = find_traffic(log,flags)
     ips = sort_ips(conns)
     targets = make_targets(conns, ips)
     for T in targets:
