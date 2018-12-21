@@ -1,1 +1,4 @@
-./py/ipynb_checkpoints/*
+./tests/ipynb_checkpoints
+py_flood/__pycache__/
+py_flood.egg-info
+

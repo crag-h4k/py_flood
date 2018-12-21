@@ -1,6 +1,5 @@
 from joblib import Parallel, delayed
 from bat import bro_log_reader
-from cfg import SSL_LOG, FLAGS
 
 from Target import Target
 
