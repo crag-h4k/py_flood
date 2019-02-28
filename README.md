@@ -9,9 +9,4 @@ To use threads:
 One theads with verbose output
 
     python3 flood.py <ip_address> <first_port> <last_port>
-    
-# Title
-
-## Subtitle
-
-### Subtitle
+   
